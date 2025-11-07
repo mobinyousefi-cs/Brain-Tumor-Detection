@@ -1,0 +1,80 @@
+[build-system]
+"Programming Language :: Python :: 3",
+"Programming Language :: Python :: 3 :: Only",
+"License :: OSI Approved :: MIT License",
+"Operating System :: OS Independent",
+"Intended Audience :: Science/Research",
+"Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+
+dependencies = [
+"torch>=2.2",
+"torchvision>=0.17",
+"numpy>=1.25",
+"pandas>=2.0",
+"scikit-learn>=1.4",
+"Pillow>=10.0",
+"matplotlib>=3.8",
+"tqdm>=4.66",
+]
+
+
+[project.optional-dependencies]
+dev = [
+"pytest>=8.0",
+"black>=24.0",
+"ruff>=0.6.0",
+"mypy>=1.11",
+]
+
+
+[project.urls]
+Homepage = "https://github.com/mobinyousefi-cs/brain-tumor-detection"
+Issues = "https://github.com/mobinyousefi-cs/brain-tumor-detection/issues"
+
+
+[tool.hatch.build]
+packages = [
+{ include = "brain_tumor_detection", from = "src" },
+]
+
+
+[tool.black]
+line-length = 88
+target-version = ["py310", "py311"]
+include = "\\.py$"
+
+
+[tool.ruff]
+line-length = 88
+src = ["src", "tests"]
+
+
+target-version = "py310"
+
+
+[tool.ruff.lint]
+select = [
+"E", "F", "W", # flake8 base
+"I", # isort
+"B", # bugbear
+"UP", # pyupgrade
+]
+ignore = [
+"E203", # space before : (conflicts with Black)
+"E501", # line length handled by Black
+]
+
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra -q"
+testpaths = ["tests"]
+
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+check_untyped_defs = true
+warn_unused_configs = true
